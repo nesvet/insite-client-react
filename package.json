@@ -1,0 +1,37 @@
+{
+	"name": "insite-client-react",
+	"version": "1.0.5",
+	"description": "React components for inSite client app",
+	"type": "module",
+	"main": "./lib/index.js",
+	"module": "./lib/index.js",
+	"exports": {
+		".": "./lib/index.js",
+		"./Subject": "./lib/Subject/index.jsx",
+		"./ContextMenu": "./lib/ContextMenu/index.js"
+	},
+	"packageManager": "yarn@1.22.22",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"build": "tsc -p ."
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/nesvet/insite-client-react.git"
+	},
+	"keywords": [
+		"insite",
+		"client",
+		"react"
+	],
+	"author": "Eugene Nesvetaev <dev@nesvet.dev> (https://nesvet.dev/)",
+	"license": "MIT",
+	"dependencies": {
+		"react-avatar-editor": "13",
+		"@nesvet/ui-utils": "^1"
+	},
+	"devDependencies": {
+		"@nesvet/eslint-config": "^1",
+		"eslint-plugin-react": ">= 7"
+	}
+}
