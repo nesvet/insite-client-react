@@ -10,7 +10,7 @@
 		"./Subject": "./lib/Subject/index.jsx",
 		"./ContextMenu": "./lib/ContextMenu/index.js"
 	},
-	"packageManager": "yarn@1.22.22",
+	"packageManager": "bun@1.1.8",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"build": "tsc -p ."
