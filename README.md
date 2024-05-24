@@ -9,5 +9,5 @@ $ npm install insite-client-react
 Or
 
 ```sh
-$ yarn add insite-client-react
+$ bun add insite-client-react
 ```
