@@ -1,6 +1,6 @@
 {
   "name": "insite-client-react",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "React components for inSite client app",
   "type": "module",
   "main": "./lib/index.js",
@@ -10,7 +10,7 @@
     "./Subject": "./lib/Subject/index.jsx",
     "./ContextMenu": "./lib/ContextMenu/index.js"
   },
-  "packageManager": "bun@1.1.9",
+  "packageManager": "bun@1.1.14",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -26,8 +26,8 @@
   "author": "Eugene Nesvetaev <dev@nesvet.dev> (https://nesvet.dev/)",
   "license": "MIT",
   "dependencies": {
-    "react-avatar-editor": "13",
-    "@nesvet/ui-utils": "^1"
+    "react-avatar-editor": "^13.0.2",
+    "@nesvet/ui-utils": "^1.0.47"
   },
   "devDependencies": {
     "@nesvet/eslint-config": "^2.0.14"
