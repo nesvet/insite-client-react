@@ -63,7 +63,6 @@ export class EditableAvatar extends Component {
 	#menuProps = {
 		anchorOrigin: { horizontal: "center", vertical: "center" },
 		transformOrigin: { horizontal: "center", vertical: "bottom" },
-		disablePortal: true,
 		ref: menu => (this.#menu = menu)
 	};
 	
@@ -76,7 +75,7 @@ export class EditableAvatar extends Component {
 	
 	render() {
 		
-		const { className, size, person, online, editable } = this.props;
+		const { className, size, person, online, editable, disablePortal } = this.props;
 		
 		return (
 			<Dropzone
@@ -103,7 +102,7 @@ export class EditableAvatar extends Component {
 							<EditIcon />
 						</IconButton>
 						
-						<ContextMenu {...this.#menuProps}>
+						<ContextMenu {...this.#menuProps} disablePortal={disablePortal}>
 							<ContextMenuItem onClick={this.#handleMenuNewClick}>
 								Загрузить новое фото…
 							</ContextMenuItem>
