@@ -1,9 +1,10 @@
 import { Component } from "react";
+import { clsx } from "clsx";
+import { Dropzone } from "@nesvet/missing-mui4-components/Dropzone";
 import IconButton from "@material-ui/core/esm/IconButton";
 import EditIcon from "@material-ui/icons/esm/Edit";
-import { Dropzone } from "@nesvet/missing-mui4-components/Dropzone";
-import { clsx } from "clsx";
 import { createStyles } from "$styles";
+import { ContextMenu, ContextMenuItem } from "../ContextMenu";
 import { Avatar } from "./Avatar";
 
 
@@ -71,21 +72,22 @@ export class EditableAvatar extends Component {
 				disabled={!editable}
 			>
 				<Avatar
+					disableAutoUpdate
 					for={person}
 					size={size}
-					online={online}
 					tooltip={false}
-					disableAutoUpdate
+					online={online}
 				/>
 				
 				{editable && (
-					<IconButton
-						className={classes.edit}
-						onPointerDown={this.#handleEditPointerDown}
-						onClick={this.#handleEditClick}
-					>
-						<EditIcon />
-					</IconButton>
+					<>
+						<IconButton
+							className={classes.edit}
+							onClick={this.#handleEditClick}
+							onPointerDown={this.#handleEditPointerDown}
+						>
+							<EditIcon />
+						</IconButton>
 				)}
 			</Dropzone>
 		);

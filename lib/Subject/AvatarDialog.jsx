@@ -1,4 +1,8 @@
 import AvatarEditor from "react-avatar-editor";
+import { clsx } from "clsx";
+import Dialog from "@nesvet/missing-mui4-components/Dialog";
+import { Dropzone } from "@nesvet/missing-mui4-components/Dropzone";
+import LoadingButton from "@nesvet/missing-mui4-components/LoadingButton";
 import Button from "@material-ui/core/esm/Button";
 import Grid from "@material-ui/core/esm/Grid";
 import IconButton from "@material-ui/core/esm/IconButton";
@@ -7,11 +11,6 @@ import RotateLeftIcon from "@material-ui/icons/esm/RotateLeft";
 import RotateRightIcon from "@material-ui/icons/esm/RotateRight";
 import ZoomInIcon from "@material-ui/icons/esm/ZoomIn";
 import ZoomOutIcon from "@material-ui/icons/esm/ZoomOut";
-import Dialog from "@nesvet/missing-mui4-components/Dialog";
-import { Dropzone } from "@nesvet/missing-mui4-components/Dropzone";
-import LoadingButton from "@nesvet/missing-mui4-components/LoadingButton";
-import { clsx } from "clsx";
-import { app } from "$app";
 import { createStyles, theme } from "$styles";
 import { Avatar } from "./Avatar";
 
@@ -68,12 +67,12 @@ const classes = createStyles(({ spacing, palette, alpha }) => ({
 
 function hexToRgb(hex) {
 	return (
-		/^#?[a-f\d]{6}$/.test(hex) ?
-			hex.match(/[a-f\d]{2}/gi) :
-			/^#?[a-f\d]{3}$/.test(hex) ?
-				hex.match(/[a-f\d]/gi).map(c => c + c) :
+		/^#?[\da-f]{6}$/.test(hex) ?
+			hex.match(/[\da-f]{2}/gi) :
+			/^#?[\da-f]{3}$/.test(hex) ?
+				hex.match(/[\da-f]/gi).map(c => c + c) :
 				null
-	)?.map(c => parseInt(c, 16));
+	)?.map(c => Number.parseInt(c, 16));
 }
 
 const sizesEntries = Object.entries(Avatar.sizes);
@@ -163,7 +162,7 @@ export class AvatarDialog extends Dialog {
 		this.#wheelEvent = undefined;
 		this.#wheelRafHandle = undefined;
 		
-		const k = Math.pow(2, -event.deltaY * (event.deltaMode ? 50 : 1) / 500);
+		const k = 2 ** (-event.deltaY * (event.deltaMode ? 50 : 1) / 500);
 		
 		this.setState({ scale: Math.min(Math.max(this.state.scale * k, this.scaleMin), this.scaleMax) });
 		
@@ -223,24 +222,24 @@ export class AvatarDialog extends Dialog {
 			>
 				{file ? (
 					<Grid
+						alignItems="stretch"
 						container
 						direction="column"
-						alignItems="stretch"
 						spacing={0}
 					>
 						
-						<Grid item container>
+						<Grid container item>
 							<AvatarEditor
 								className={classes.editor}
-								width={this.size}
-								height={this.size}
 								border={this.border}
 								borderRadius={this.size / 2}
 								color={this.color}
+								height={this.size}
 								image={file}
-								scale={scale}
-								rotate={rotate}
 								position={position}
+								rotate={rotate}
+								scale={scale}
+								width={this.size}
 								onPositionChange={this.handlePositionChange}
 								onWheel={this.#handleWheel}
 								ref={this.handleEditorRef}
@@ -249,21 +248,21 @@ export class AvatarDialog extends Dialog {
 						
 						<Grid
 							className={classes.previewLayout}
-							item
-							container
 							alignItems="center"
+							container
+							item
 							justifyContent="space-evenly"
 						>
 							{sizesEntries.map(([ key, size ]) => (
 								<div className={clsx(classes.previewWrapper, classes[`previewWrapper-${key}`])} key={size}>
 									<AvatarEditor
-										width={size}
-										height={size}
 										border={0}
+										height={size}
 										image={file}
-										scale={scale}
-										rotate={rotate}
 										position={position}
+										rotate={rotate}
+										scale={scale}
+										width={size}
 										onPositionChange={this.handlePositionChange}
 										onWheel={this.#handleWheel}
 									/>
@@ -272,10 +271,10 @@ export class AvatarDialog extends Dialog {
 						</Grid>
 						
 						<Grid
-							item
-							container
-							spacing={1}
 							alignItems="center"
+							container
+							item
+							spacing={1}
 						>
 							<Grid item>
 								<IconButton onClick={this.handleScaleDownClick} disabled={scale === this.scaleMin}>
@@ -285,9 +284,9 @@ export class AvatarDialog extends Dialog {
 							<Grid item xs>
 								<Slider
 									value={scale}
+									max={this.scaleMax}
 									min={this.scaleMin}
 									step={this.scaleSliderStep}
-									max={this.scaleMax}
 									onChange={this.handleScaleChange}
 								/>
 							</Grid>
@@ -300,10 +299,10 @@ export class AvatarDialog extends Dialog {
 						
 						<Grid
 							className={classes.rotateSliderLayout}
-							item
-							container
-							spacing={1}
 							alignItems="center"
+							container
+							item
+							spacing={1}
 						>
 							<Grid item>
 								<IconButton onClick={this.handleRotateLeftClick} disabled={rotate === this.rotateMin}>
@@ -313,9 +312,9 @@ export class AvatarDialog extends Dialog {
 							<Grid item xs>
 								<Slider
 									value={rotate}
+									max={this.rotateMax}
 									min={this.rotateMin}
 									step={this.rotateSliderStep}
-									max={this.rotateMax}
 									onChange={this.handleRotateChange}
 								/>
 							</Grid>
@@ -337,28 +336,32 @@ export class AvatarDialog extends Dialog {
 		
 		const { file, isPending } = this.state;
 		
-		return (<>
-			
-			{file && (<>
-				<Button onClick={this.openFileDialog}>
-					Другое изображение
-				</Button>
+		return (
+			<>
 				
-				<div className={classes.actionsSpace} />
-			</>)}
+				{file && (
+					<>
+						<Button onClick={this.openFileDialog}>
+							Другое изображение
+						</Button>
+						
+						<div className={classes.actionsSpace} />
+					</>
+				)}
+				
+				<LoadingButton
+					color="primary"
+					disableElevation
+					pending={isPending}
+					variant="contained"
+					onClick={this.handleConfirmClick}
+					disabled={!file}
+				>
+					Сохранить
+				</LoadingButton>
 			
-			<LoadingButton
-				pending={isPending}
-				variant="contained"
-				disableElevation
-				color="primary"
-				onClick={this.handleConfirmClick}
-				disabled={!file}
-			>
-				Сохранить
-			</LoadingButton>
-		
-		</>);
+			</>
+		);
 	}
 	
 	componentDidUpdate() {
