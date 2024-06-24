@@ -184,7 +184,7 @@ export class AvatarDialog extends Dialog {
 		
 		this.setState({ isPending: true });
 		
-		app.ws.transfer(this.props.transferKind, {
+		this.props.ws.transfer(this.props.transferKind, {
 			metadata: { _id: this.state.person._id },
 			data: this.editor.getImageScaledToCanvas().toDataURL("image/webp", this.quality),
 			collect: true,
