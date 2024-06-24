@@ -76,6 +76,7 @@ export const styles = {
 		transform: "scale(0)",
 		transitionProperty: "transform",
 		transitionDuration: theme.transitions.duration.shortest,
+		pointerEvents: "none",
 		
 		"$online &": {
 			transform: "scale(1)"
@@ -93,9 +94,9 @@ export const classes = createStyles(styles, "Avatar");
 
 export function Avatar(props) {
 	return props.for?.isOrg ? (
-		<OrgAvatar { ...props } />
+		<OrgAvatar {...props} />
 	) : (
-		<UserAvatar { ...props } />
+		<UserAvatar {...props} />
 	);
 }
 
