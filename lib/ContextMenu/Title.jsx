@@ -9,7 +9,7 @@ export function ContextMenuTitle({ className, children, ...restProps }) {
 			className={clsx(classes.title, className)}
 			component="li"
 			variant="overline"
-			{ ...restProps }
+			{...restProps}
 		>
 			{children}
 		</Typography>

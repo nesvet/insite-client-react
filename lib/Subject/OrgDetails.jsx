@@ -6,9 +6,7 @@ import { subscribe, unsubscribe } from "./subscriptions";
 
 const classes = createStyles({
 	
-	root: {
-		
-	},
+	root: {},
 	
 	title: {
 		fontWeight: 500
@@ -34,7 +32,7 @@ export class OrgDetails extends Component {
 		
 		
 		return (
-			<div className={clsx(classes.root, classesProp?.details, className)} { ...restProps }>
+			<div className={clsx(classes.root, classesProp?.details, className)} {...restProps}>
 				{title && (
 					<div className={clsx(classes.title, classesProp?.title)}>
 						{subject.title || "—"}

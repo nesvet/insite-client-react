@@ -1,8 +1,8 @@
 import { Component } from "react";
+import { clsx } from "clsx";
+import { dispatchEventThrough } from "@nesvet/ui-utils";
 import Fade from "@material-ui/core/esm/Fade";
 import Menu from "@material-ui/core/esm/Menu";
-import { dispatchEventThrough } from "@nesvet/ui-utils";
-import { clsx } from "clsx";
 import { theme } from "$styles";
 import { classes } from "./classes";
 import { ContextMenuContext } from "./context";
@@ -164,9 +164,8 @@ export class ContextMenu extends Component {
 		if (event.key === "ArrowLeft") {
 			if (this.superMenu)
 				this.close();
-		} else if (event.key === "ArrowRight")
-			if (event.target.classList.contains(classes.subItem))
-				event.target.click();
+		} else if (event.key === "ArrowRight" && event.target.classList.contains(classes.subItem))
+			event.target.click();
 		
 		
 	};
@@ -197,25 +196,25 @@ export class ContextMenu extends Component {
 			<Menu
 				className={clsx(classes.root, !isOpened && classes.through, className)}
 				classes={{ paper: clsx(classes.paper, paperClassName) }}
-				elevation={0}
-				marginThreshold={4}
-				open={isOpened}
-				anchorReference={anchor ? "anchorEl" : "anchorPosition"}
 				anchorEl={anchor}
 				anchorPosition={position}
+				anchorReference={anchor ? "anchorEl" : "anchorPosition"}
+				elevation={0}
 				getContentAnchorEl={null}
+				marginThreshold={4}
+				open={isOpened}
 				PaperProps={this.#PaperProps}
 				PopoverClasses={PopoverClasses}
 				TransitionComponent={Fade}
-				TransitionProps={this.#TransitionProps}
 				transitionDuration={this.#transitionDurationProp}
+				TransitionProps={this.#TransitionProps}
+				onClick={this.#handleClick}
 				onClose={this.close}
+				onKeyDown={this.#handleKeyDown}
 				onPointerDown={this.#handlePointerDown}
 				onPointerMove={this.#handlePointerMove}
 				onPointerUp={this.#handlePointerUp}
-				onClick={this.#handleClick}
-				onKeyDown={this.#handleKeyDown}
-				{ ...restProps }
+				{...restProps}
 				ref={this.#handleRef}
 			>
 				<ContextMenuContext.Provider value={this}>

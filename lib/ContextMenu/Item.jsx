@@ -9,7 +9,7 @@ export class ContextMenuItem extends Component {
 	
 	#handlePointerEnter = () => this.context.subMenu?.superItem._handleSiblingPointerEnter();
 	
-	#handleRef = node => this.node = node;
+	#handleRef = node => (this.node = node);
 	
 	
 	render() {
@@ -21,7 +21,7 @@ export class ContextMenuItem extends Component {
 				className={clsx(classes.item, className)}
 				onPointerEnter={this.#handlePointerEnter}
 				ref={this.#handleRef}
-				{ ...restProps }
+				{...restProps}
 			>
 				{children || label}
 			</MenuItem>

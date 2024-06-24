@@ -1,6 +1,6 @@
 import { Component } from "react";
-import Tooltip from "@material-ui/core/Tooltip";
 import { clsx } from "clsx";
+import Tooltip from "@material-ui/core/Tooltip";
 import { classes } from "./Avatar";
 import { subscribe, unsubscribe } from "./subscriptions";
 
@@ -22,19 +22,23 @@ export class UserAvatar extends Component {
 		const {
 			initials = "?",
 			avatarUrl,
-			isOnline
+			isOnline,
+			displayLabel
 		} = subject;
 		
 		let avatar = (
-			<div className={clsx(
-				classes.root,
-				className,
-				size && classes[size],
-				isOnline && classes.online
-			)} { ...restProps }>
+			<div
+				className={clsx(
+					classes.root,
+					className,
+					size && classes[size],
+					isOnline && classes.online
+				)}
+				{...restProps}
+			>
 				<div className={classes.contents}>
 					{avatarUrl ? (
-						<img className={classes.avatar} src={avatarUrl} alt={initials} />
+						<img className={classes.avatar} alt={initials} src={avatarUrl} />
 					) : initials}
 				</div>
 				{online && isOnline !== undefined && (
@@ -46,10 +50,10 @@ export class UserAvatar extends Component {
 		if (tooltip === true)
 			avatar = (
 				<Tooltip
-					title={subject.displayLabel}
-					placement="bottom"
 					arrow
 					enterDelay={500}
+					placement="bottom"
+					title={displayLabel}
 				>
 					{avatar}
 				</Tooltip>

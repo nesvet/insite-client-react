@@ -51,18 +51,18 @@ export class Subject extends Component {
 		} = this.props;
 		
 		return (
-			<div className={clsx(classes.root, vertical && classes.vertical, classes[size], classesProp?.root, className)} { ...restProps }>
+			<div className={clsx(classes.root, vertical && classes.vertical, classes[size], classesProp?.root, className)} {...restProps}>
 				{avatar && (
 					avatar === true ? (
 						<Avatar
 							className={classes.avatar}
 							classes={classesProp}
-							size={size}
-							for={subject}
-							online={online}
-							tooltip={tooltip}
 							disableAutoUpdate
-							{ ...AvatarProps }
+							for={subject}
+							size={size}
+							tooltip={tooltip}
+							online={online}
+							{...AvatarProps}
 						/>
 					) : avatar
 				)}
@@ -77,7 +77,7 @@ export class Subject extends Component {
 						name
 						job
 						disableAutoUpdate
-						{ ...DetailsProps }
+						{...DetailsProps}
 					/>
 				)}
 				{children}

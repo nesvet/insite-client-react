@@ -5,7 +5,7 @@ import { sizes } from "./styles";
 import { subscribe, unsubscribe } from "./subscriptions";
 
 
-const classes = createStyles(({ spacing, palette }) => ({
+const classes = createStyles(({ spacing }) => ({
 	
 	root: {
 		display: "flex",
@@ -16,7 +16,7 @@ const classes = createStyles(({ spacing, palette }) => ({
 		alignItems: "center"
 	},
 	
-	...Object.fromEntries(Object.entries(sizes).map(([ key, value ], i) => [ key, {
+	...Object.fromEntries(Object.entries(sizes).map(([ key, value ]) => [ key, {
 		fontSize: spacing(1.5) + Math.floor(value / 12)
 	} ])),
 	
@@ -24,13 +24,9 @@ const classes = createStyles(({ spacing, palette }) => ({
 		lineHeight: 1.2
 	},
 	
-	firstName: {
-		
-	},
+	firstName: {},
 	
-	lastName: {
-		
-	},
+	lastName: {},
 	
 	job: {
 		fontSize: ".75em",
@@ -64,18 +60,20 @@ export class UserDetails extends Component {
 		} = this.props;
 		
 		return (
-			<div className={clsx(classes.root, vertical && classes.vertical, classes[size], classesProp?.details, className)} { ...restProps }>
+			<div className={clsx(classes.root, vertical && classes.vertical, classes[size], classesProp?.details, className)} {...restProps}>
 				{name && (
 					<div className={clsx(classes.name, classesProp?.name)}>
-						{subject.name ? (<>
-							<span className={clsx(classes.firstName, classesProp?.firstName)}>
-								{subject.name?.first}
-							</span>
-							{" "}
-							<span className={clsx(classes.lastName, classesProp?.lastName)}>
-								{subject.name?.last}
-							</span>
-						</>) : "—"}
+						{subject.name ? (
+							<>
+								<span className={clsx(classes.firstName, classesProp?.firstName)}>
+									{subject.name?.first}
+								</span>
+								{" "}
+								<span className={clsx(classes.lastName, classesProp?.lastName)}>
+									{subject.name?.last}
+								</span>
+							</>
+						) : "—"}
 					</div>
 				)}
 				{job && subject.job && (

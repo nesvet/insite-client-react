@@ -1,9 +1,9 @@
 import { clsx } from "clsx";
 import MenuItem from "@material-ui/core/esm/MenuItem";
 import ChevronRightIcon from "@material-ui/icons/esm/ChevronRight";
-import { ContextMenu } from "./Menu";
-import { ContextMenuItem } from "./Item";
 import { classes } from "./classes";
+import { ContextMenuItem } from "./Item";
+import { ContextMenu } from "./Menu";
 
 
 export class ContextMenuSubMenuItem extends ContextMenuItem {
@@ -16,7 +16,7 @@ export class ContextMenuSubMenuItem extends ContextMenuItem {
 	
 	#handlePointerEnter = () => {
 		
-		if (this.context.subMenu && this.context.subMenu.superItem != this)
+		if (this.context.subMenu && this.context.subMenu.superItem !== this)
 			this.context.subMenu.superItem._handleSiblingPointerEnter();
 		
 		this.isHovered = true;
@@ -59,21 +59,21 @@ export class ContextMenuSubMenuItem extends ContextMenuItem {
 		this.isMenuHovered = true;
 		this.isMenuPinned = true;
 		this.props.MenuProps?.onPointerEnter?.(event);
-	
+		
 	};
 	
 	#handleMenuPointerLeave = event => {
 		
 		this.isMenuHovered = false;
 		this.props.MenuProps?.onPointerLeave?.(event);
-	
+		
 	};
 	
 	#handleMenuClose = event => {
 		
 		this.isMenuPinned = false;
 		this.props.MenuProps?.onClose?.(event);
-	
+		
 	};
 	
 	#handleRef = node => {
@@ -101,36 +101,38 @@ export class ContextMenuSubMenuItem extends ContextMenuItem {
 			...restProps
 		} = this.props;
 		
-		return (<>
+		return (
+			<>
+				
+				<MenuItem
+					className={clsx(classes.item, classes.subItem, className)}
+					onClick={this.#handleClick}
+					onPointerEnter={this.#handlePointerEnter}
+					onPointerLeave={this.#handlePointerLeave}
+					{...restProps}
+					ref={this.#handleRef}
+				>
+					<span>
+						{label}
+					</span>
+					<ChevronRightIcon fontSize="small" />
+				</MenuItem>
+				
+				<ContextMenu
+					anchorOrigin={this.menuAnchorOrigin}
+					PopoverClasses={this.PopoverClasses}
+					superMenu={this.context}
+					transformOrigin={this.menuTransformOrigin}
+					onClose={this.#handleMenuClose}
+					onPointerEnter={this.#handleMenuPointerEnter}
+					onPointerLeave={this.#handleMenuPointerLeave}
+					ref={this.#handleMenuRef}
+					{...restMenuProps}
+				>
+					{children}
+				</ContextMenu>
 			
-			<MenuItem
-				className={clsx(itemClasses.root, classes.subItem, className)}
-				onPointerEnter={this.#handlePointerEnter}
-				onPointerLeave={this.#handlePointerLeave}
-				onClick={this.#handleClick}
-				{ ...restProps }
-				ref={this.#handleRef}
-			>
-				<span>
-					{label}
-				</span>
-				<ChevronRightIcon fontSize="small" />
-			</MenuItem>
-			
-			<ContextMenu
-				anchorOrigin={this.menuAnchorOrigin}
-				transformOrigin={this.menuTransformOrigin}
-				PopoverClasses={this.PopoverClasses}
-				{ ...restMenuProps }
-				superMenu={this.context}
-				onPointerEnter={this.#handleMenuPointerEnter}
-				onPointerLeave={this.#handleMenuPointerLeave}
-				onClose={this.#handleMenuClose}
-				ref={this.#handleMenuRef}
-			>
-				{children}
-			</ContextMenu>
-			
-		</>);
+			</>
+		);
 	}
 }

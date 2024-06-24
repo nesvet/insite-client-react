@@ -4,8 +4,8 @@ import { UserDetails } from "./UserDetails";
 
 export function Details(props) {
 	return props.for?.isOrg ? (
-		<OrgDetails { ...props } />
+		<OrgDetails {...props} />
 	) : (
-		<UserDetails { ...props } />
+		<UserDetails {...props} />
 	);
 }
