@@ -1,6 +1,6 @@
 {
   "name": "insite-client-react",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "React components for inSite client app",
   "type": "module",
   "main": "./lib/index.js",
@@ -30,6 +30,6 @@
     "@nesvet/ui-utils": "^1.0.47"
   },
   "devDependencies": {
-    "@nesvet/eslint-config": "^2.0.17"
+    "@nesvet/eslint-config": "^2.0.18"
   }
 }
