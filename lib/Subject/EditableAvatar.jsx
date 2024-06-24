@@ -51,13 +51,27 @@ export class EditableAvatar extends Component {
 	#handleEditPointerDown = event =>
 		!event.button &&
 		this.props.person.avatarUrl &&
-		this.props.menu?.open({ event }, this.props.person);
+		this.#menu?.open({ event });
 	
 	#handleEditClick = () =>
 		!this.props.person.avatarUrl &&
 		this.props.dialog?.open({ person: this.props.person, openFileDialog: true });
 	
 	#handleFile = file => this.props.dialog?.open({ person: this.props.person, file });
+	
+	#menu;
+	#menuProps = {
+		anchorOrigin: { horizontal: "center", vertical: "center" },
+		transformOrigin: { horizontal: "center", vertical: "bottom" },
+		disablePortal: true,
+		ref: menu => (this.#menu = menu)
+	};
+	
+	#handleMenuNewClick = () => this.props.dialog.open({ person: this.props.person, openFileDialog: true });
+	
+	#handleMenuDeleteClick = async () =>
+		confirm(this.props.self ? "Удалить фото?" : "Удалить фото пользователя?") &&
+		await this.props.ws.sendRequest(this.props.self ? "user.delete-avatar" : "users.people.delete-avatar", this.props.person._id);
 	
 	
 	render() {
@@ -88,6 +102,19 @@ export class EditableAvatar extends Component {
 						>
 							<EditIcon />
 						</IconButton>
+						
+						<ContextMenu {...this.#menuProps}>
+							<ContextMenuItem onClick={this.#handleMenuNewClick}>
+								Загрузить новое фото…
+							</ContextMenuItem>
+							
+							{person.avatarUrl && (
+								<ContextMenuItem onClick={this.#handleMenuDeleteClick}>
+									Удалить…
+								</ContextMenuItem>
+							)}
+						</ContextMenu>
+					</>
 				)}
 			</Dropzone>
 		);
