@@ -70,13 +70,13 @@ export class Subject extends Component {
 					<Details
 						className={classes.details}
 						classes={classesProp}
-						vertical={vertical}
-						size={size}
-						for={subject}
-						title
-						name
-						job
+						name={name}
 						disableAutoUpdate
+						for={subject}
+						job={job}
+						size={size}
+						title={title}
+						vertical={vertical}
 						{...DetailsProps}
 					/>
 				)}
