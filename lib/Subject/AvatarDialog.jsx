@@ -1,8 +1,8 @@
 import AvatarEditor from "react-avatar-editor";
 import { clsx } from "clsx";
-import Dialog from "@nesvet/missing-mui4-components/Dialog";
+import { Dialog } from "@nesvet/missing-mui4-components/Dialog";
 import { Dropzone } from "@nesvet/missing-mui4-components/Dropzone";
-import LoadingButton from "@nesvet/missing-mui4-components/LoadingButton";
+import { LoadingButton } from "@nesvet/missing-mui4-components/LoadingButton";
 import Button from "@material-ui/core/esm/Button";
 import Grid from "@material-ui/core/esm/Grid";
 import IconButton from "@material-ui/core/esm/IconButton";
