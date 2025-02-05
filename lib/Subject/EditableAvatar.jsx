@@ -70,7 +70,7 @@ export class EditableAvatar extends Component {
 	
 	#handleMenuDeleteClick = async () =>
 		confirm(this.props.self ? "Удалить фото?" : "Удалить фото пользователя?") &&
-		await this.props.ws.sendRequest(this.props.self ? "user.delete-avatar" : "users.people.delete-avatar", this.props.person._id);
+		await this.props.ws.sendRequest("users.avatars.delete", this.props.person._id);
 	
 	
 	render() {
