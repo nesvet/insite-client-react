@@ -30,6 +30,6 @@
     "react-avatar-editor": "^13.0.2"
   },
   "devDependencies": {
-    "@nesvet/eslint-config": "^2.0.47"
+    "@nesvet/eslint-config": "^2.0.48"
   }
 }
