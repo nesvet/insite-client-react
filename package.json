@@ -10,7 +10,7 @@
     "./Subject": "./lib/Subject/index.jsx",
     "./ContextMenu": "./lib/ContextMenu/index.js"
   },
-  "packageManager": "bun@1.2.2",
+  "packageManager": "bun@1.2.3",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
