@@ -68,14 +68,20 @@ export class EditableAvatar extends Component {
 	
 	#handleMenuNewClick = () => this.props.dialog.open({ person: this.props.person, openFileDialog: true });
 	
-	#handleMenuDeleteClick = async () =>
-		confirm(this.props.self ? "Удалить фото?" : "Удалить фото пользователя?") &&
-		await this.props.ws.sendRequest("users.avatars.delete", this.props.person._id);
+	#handleMenuDeleteClick = async () => {
+		
+		const { self, deletePhotoConfirmMessage, deleteUsersPhotoConfirmMessage, ws, person } = this.props;
+		
+		confirm(`${self ? deletePhotoConfirmMessage : deleteUsersPhotoConfirmMessage}?`) &&
+		
+		await ws.sendRequest("users.avatars.delete", person._id);
+		
+	};
 	
 	
 	render() {
 		
-		const { className, size, person, online, editable, disablePortal } = this.props;
+		const { className, size, person, online, editable, disablePortal, uploadNewPhotoLabel, deleteLabel } = this.props;
 		
 		return (
 			<Dropzone
@@ -104,12 +110,12 @@ export class EditableAvatar extends Component {
 						
 						<ContextMenu {...this.#menuProps} disablePortal={disablePortal}>
 							<ContextMenuItem onClick={this.#handleMenuNewClick}>
-								Загрузить новое фото…
+								{uploadNewPhotoLabel}…
 							</ContextMenuItem>
 							
 							{person.avatarUrl && (
 								<ContextMenuItem onClick={this.#handleMenuDeleteClick}>
-									Удалить…
+									{deleteLabel}…
 								</ContextMenuItem>
 							)}
 						</ContextMenu>
@@ -118,4 +124,13 @@ export class EditableAvatar extends Component {
 			</Dropzone>
 		);
 	}
+	
+	
+	static defaultProps = {
+		uploadNewPhotoLabel: "Upload new photo",
+		deleteLabel: "Delete",
+		deletePhotoConfirmMessage: "Delete photo",
+		deleteUsersPhotoConfirmMessage: "Delete user's photo"
+	};
+	
 }

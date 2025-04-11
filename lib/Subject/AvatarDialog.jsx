@@ -91,7 +91,7 @@ export class AvatarDialog extends Dialog {
 		
 	}
 	
-	title = "Аватар";
+	title = this.props.title;
 	
 	getSubtitle = () => this.props.showName !== false && this.state.person?.displayLabel;
 	
@@ -330,9 +330,11 @@ export class AvatarDialog extends Dialog {
 		);
 	}
 	
-	closeButtonLabel = "Отмена";
+	closeButtonLabel = this.props.closeButtonLabel;
 	
 	renderActions() {
+		
+		const { anotherImageLabel, confirmButtonLabel } = this.props;
 		
 		const { file, isPending } = this.state;
 		
@@ -342,7 +344,7 @@ export class AvatarDialog extends Dialog {
 				{file && (
 					<>
 						<Button onClick={this.openFileDialog}>
-							Другое изображение
+							{anotherImageLabel}
 						</Button>
 						
 						<div className={classes.actionsSpace} />
@@ -357,7 +359,7 @@ export class AvatarDialog extends Dialog {
 					onClick={this.handleConfirmClick}
 					disabled={!file}
 				>
-					Сохранить
+					{confirmButtonLabel}
 				</LoadingButton>
 			
 			</>
@@ -370,5 +372,13 @@ export class AvatarDialog extends Dialog {
 			this.openFileDialog();
 		
 	}
+	
+	
+	static defaultProps = {
+		title: "Avatar",
+		closeButtonLabel: "Cancel",
+		anotherImageLabel: "Another image",
+		confirmButtonLabel: "Save"
+	};
 	
 }
