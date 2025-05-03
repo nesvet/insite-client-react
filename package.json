@@ -1,35 +1,35 @@
 {
-  "name": "insite-client-react",
-  "version": "1.0.13",
-  "description": "React components for inSite client app",
-  "type": "module",
-  "main": "./lib/index.js",
-  "module": "./lib/index.js",
-  "exports": {
-    ".": "./lib/index.js",
-    "./Subject": "./lib/Subject/index.jsx",
-    "./ContextMenu": "./lib/ContextMenu/index.js"
-  },
-  "packageManager": "bun@1.2.9",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/nesvet/insite-client-react.git"
-  },
-  "keywords": [
-    "insite",
-    "client",
-    "react"
-  ],
-  "author": "Eugene Nesvetaev <dev@nesvet.dev> (https://nesvet.dev/)",
-  "license": "MIT",
-  "dependencies": {
-    "@nesvet/ui-utils": "^1.0.47",
-    "react-avatar-editor": "^13.0.2"
-  },
-  "devDependencies": {
-    "@nesvet/eslint-config": "^2.0.52"
-  }
+	"name": "insite-client-react",
+	"version": "1.0.13",
+	"description": "React components for inSite client app",
+	"type": "module",
+	"main": "./lib/index.js",
+	"module": "./lib/index.js",
+	"exports": {
+		".": "./lib/index.js",
+		"./Subject": "./lib/Subject/index.jsx",
+		"./ContextMenu": "./lib/ContextMenu/index.js"
+	},
+	"packageManager": "bun@1.2.11",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/nesvet/insite-client-react.git"
+	},
+	"keywords": [
+		"insite",
+		"client",
+		"react"
+	],
+	"author": "Eugene Nesvetaev <dev@nesvet.dev> (https://nesvet.dev/)",
+	"license": "MIT",
+	"dependencies": {
+		"@nesvet/ui-utils": "^1.0.47",
+		"react-avatar-editor": "^13.0.2"
+	},
+	"devDependencies": {
+		"@nesvet/eslint-config": "^2.1.1"
+	}
 }
