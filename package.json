@@ -10,7 +10,7 @@
 		"./Subject": "./lib/Subject/index.jsx",
 		"./ContextMenu": "./lib/ContextMenu/index.js"
 	},
-	"packageManager": "bun@1.2.11",
+	"packageManager": "bun@1.2.18",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
@@ -30,6 +30,6 @@
 		"react-avatar-editor": "^13.0.2"
 	},
 	"devDependencies": {
-		"@nesvet/eslint-config": "^2.1.1"
+		"@nesvet/eslint-config": "^2.1.2"
 	}
 }
