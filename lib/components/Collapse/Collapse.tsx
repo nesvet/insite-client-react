@@ -4,7 +4,7 @@ import {
 	useSheet,
 	type PolymorphicComponent,
 	type PolymorphicRef
-} from "$shared";
+} from "../../shared";
 import styles from "./styles.css";
 
 /* eslint-disable @typescript-eslint/naming-convention */
