@@ -3,12 +3,12 @@
 	"version": "1.0.13",
 	"description": "React components for inSite client app",
 	"type": "module",
-	"main": "./lib/index.js",
-	"module": "./lib/index.js",
+	"main": "./lib/index.ts",
+	"module": "./lib/index.ts",
 	"exports": {
-		".": "./lib/index.js",
-		"./Subject": "./lib/Subject/index.jsx",
-		"./ContextMenu": "./lib/ContextMenu/index.js"
+		".": "./lib/index.ts",
+		"./Subject": "./lib/components/Subject/index.jsx",
+		"./ContextMenu": "./lib/components/ContextMenu/index.js"
 	},
 	"packageManager": "bun@1.2.21",
 	"scripts": {
