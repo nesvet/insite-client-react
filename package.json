@@ -1,6 +1,6 @@
 {
 	"name": "insite-client-react",
-	"version": "1.1.0",
+	"version": "1.1.1",
 	"description": "React components for inSite client app",
 	"type": "module",
 	"main": "./lib/index.ts",
